@@ -1,0 +1,3 @@
+# Пункт назначения
+## Получить пункт назначения
+GET  http://localhost:3000/destinations?nameDestination=Amsterdam HTTP/1.1
