@@ -5,8 +5,11 @@ import { plainToInstance } from 'class-transformer';
 import { ApplicationConfig } from 'src/libs/type';
 import { DEFAULT_APPLICATION_PORT } from 'src/libs/const';
 import { ApplicationConfiguration } from './application-configuration';
+import { CONSTRAINT_KEYS } from 'src/libs/const';
 
 export default registerAs('application', (): ApplicationConfig => {
+  let constraints: Array<string> = [];
+
   const applicationConfig: ApplicationConfig = {
     host: process.env.HOST,
     port: parseInt(process.env.PORT as string, 10) || DEFAULT_APPLICATION_PORT,
@@ -23,17 +26,24 @@ export default registerAs('application', (): ApplicationConfig => {
   });
 
   if (errors.length > 0) {
-    const constraints = errors.map(
-      (item: ValidationError) => item?.constraints?.isString
-    );
+    errors.forEach((item) => {
+      let value: string | undefined = undefined;
 
-    if (constraints === undefined) {
-      throw new Error(`
-            At the path: backend-grand-tour/src/libs/config/app-config/app-config.ts.
-            There was a mistake on line 31.
-            The variables of the environment did not go through validation.
-            `);
-    }
+      for (const key of CONSTRAINT_KEYS) {
+        const constraint = item?.constraints;
+
+        if (!constraint) {
+          return;
+        }
+
+        value = constraint[key];
+
+        if (typeof value === 'string') {
+          constraints.push(constraint[key]);
+          return;
+        }
+      }
+    });
 
     const err: string = Object.values(constraints).join(',');
     throw new Error(err);

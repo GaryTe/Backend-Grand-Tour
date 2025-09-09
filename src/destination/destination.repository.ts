@@ -1,37 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 import { Destination } from 'src/libs/type';
+import { DestinationEntity } from './destination.entity';
 
 @Injectable()
 export class DestinationRepository {
-  public async getDestination(nameDestination: string): Promise<Destination> {
-    return {
-      id: 1,
-      description:
-        'Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.',
-      name: 'Geneva',
-      pictures: [
-        {
-          src: 'img/photos/1.jpg',
-          description: '',
-        },
-        {
-          src: 'img/photos/2.jpg',
-          description: '',
-        },
-        {
-          src: 'img/photos/3.jpg',
-          description: '',
-        },
-        {
-          src: 'img/photos/4.jpg',
-          description: '',
-        },
-        {
-          src: 'img/photos/5.jpg',
-          description: '',
-        },
-      ],
-    };
+  constructor(
+    @InjectRepository(DestinationEntity)
+    private destinationRepository: Repository<DestinationEntity>,
+  ) {}
+
+  public async getDestinationByName(
+    nameDestination: string,
+  ): Promise<Destination> {
+    const [dataDestination] = await this.destinationRepository.query(`
+      SELECT *
+      FROM destination
+      WHERE destination.name = '${nameDestination}'
+      `);
+
+    return dataDestination;
+  }
+
+  public async getDestinationById(
+    id: string,
+  ): Promise<Destination> {
+    const [dataDestination] = await this.destinationRepository.query(`
+      SELECT *
+      FROM destination
+      WHERE destination.id = '${id}'
+      `);
+
+    return dataDestination;
   }
 }

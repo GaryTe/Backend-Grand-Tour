@@ -1,3 +1,7 @@
 # Пункт назначения
-## Получить пункт назначения
-GET  http://localhost:3000/destinations?nameDestination=Amsterdam HTTP/1.1
+## Получить пункт назначения по названию
+GET  http://localhost:3000/big-trip/destinations?nameDestination=Amsterdam HTTP/1.1
+
+### 
+##Получить пункт назначения по id
+GET  http://localhost:3000/big-trip/destinations/13 HTTP/1.1

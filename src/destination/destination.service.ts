@@ -7,8 +7,17 @@ import { Destination } from 'src/libs/type';
 export class DestinationService {
   constructor(private readonly destinationRepository: DestinationRepository) {}
 
-  public async getDestination(nameDestination: string): Promise<Destination> {
-    const destination = await this.destinationRepository.getDestination(nameDestination);
+  public async getDestinationByName(
+    nameDestination: string,
+  ): Promise<Destination> {
+    const destination =
+      await this.destinationRepository.getDestinationByName(nameDestination);
+
+    return destination;
+  }
+
+  public async getDestinationById(id: string): Promise<Destination> {
+    const destination = await this.destinationRepository.getDestinationById(id);
 
     return destination;
   }

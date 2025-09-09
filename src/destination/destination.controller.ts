@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 
 import { DestinationService } from './destination.service';
 import { Destination } from 'src/libs/type';
@@ -8,8 +8,20 @@ export class DestinationController {
   constructor(private readonly destinationService: DestinationService) {}
 
   @Get()
-  public async getDestination(@Query('nameDestination') nameDestination: string): Promise<Destination> {
-    const destination = await this.destinationService.getDestination(nameDestination);
+  public async getDestinationByName(
+    @Query('nameDestination') nameDestination: string,
+  ): Promise<Destination> {
+    const destination =
+      await this.destinationService.getDestinationByName(nameDestination);
+
+    return destination;
+  }
+
+  @Get('/:id')
+  public async getDestinationById(
+    @Param('id') id: string,
+  ): Promise<Destination> {
+    const destination = await this.destinationService.getDestinationById(id);
 
     return destination;
   }

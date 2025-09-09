@@ -6,6 +6,6 @@ export type Point = {
   dataTo: string;
   destination: number | null;
   id: number;
-  offers: Offer | Array<number>;
+  offers: Offer;
   type: TypeList;
 };

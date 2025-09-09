@@ -1,0 +1,41 @@
+services:
+  grand-tour.postgres:
+    image: postgres:14-alpine
+    container_name: ${POSTGRES_DB}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - grand.tour.postgres:/var/lib/postgres/data
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME} -d {POSTGRES_PASSWORD}" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - grand-tour-publication
+
+  grand-tour.pgadmin:
+    image: dpage/pgadmin4
+    container_name: ${POSTGRES_DB}.pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - 8082:80
+    networks:
+      - grand-tour-publication
+
+volumes:
+  grand.tour.postgres:
+
+networks:
+  grand-tour-publication:
+      driver: bridge
