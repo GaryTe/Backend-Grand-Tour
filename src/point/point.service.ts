@@ -26,7 +26,7 @@ export class PointService {
     return point;
   }
 
-  public async deletePoint(token: string, id: string) {
-    await this.pointRepository.deletePoint(token, id);
+  public async deletePoint(id: string) {
+    await this.pointRepository.deletePoint(id);
   }
 }
