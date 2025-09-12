@@ -1,3 +1,3 @@
 # Дополнительные опции
 ## Список дополнительных опций
-GET  http://localhost:3000/big-trip/offers?typePoint=bus HTTP/1.1
+GET  http://localhost:3000/big-trip/offers?typePoint=busss HTTP/1.1

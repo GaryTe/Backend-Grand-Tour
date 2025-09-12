@@ -16,7 +16,7 @@ export class PointRepository {
   public async getPoints(token: string): Promise<Array<Point>> {
     const dataPoints = await this.pointRepository.query(`
       SELECT * FROM point
-      WHERE point.user = '${token}' 
+      WHERE point.user = '${token}'
       `);
 
     for await (const point of dataPoints) {
@@ -95,7 +95,7 @@ export class PointRepository {
       `
       WITH dataPoint AS (
       DELETE FROM point
-      WHERE point.id = '${dto.id}'
+      WHERE point.id = '${dto.id}' AND point.user = '${token}'
       )
       INSERT INTO point
         VALUES (
@@ -133,10 +133,12 @@ export class PointRepository {
     };
   }
 
-  public async deletePoint(id: string) {
+  public async deletePoint(token: string, id: string): Promise<Array<Point> | []> {
     const [dataPoint] = await this.pointRepository.query(`
       DELETE FROM point
-      WHERE point.id = '${id}'
+      WHERE point.id = '${id}' AND point.user = '${token}'
     `);
+
+    return dataPoint;
   }
 }
