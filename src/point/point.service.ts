@@ -26,7 +26,9 @@ export class PointService {
     return point;
   }
 
-  public async deletePoint(id: string) {
-    await this.pointRepository.deletePoint(id);
+  public async deletePoint(token: string, id: string):  Promise<Array<Point> | []> {
+    const dataPoint = await this.pointRepository.deletePoint(token, id);
+
+    return dataPoint;
   }
 }

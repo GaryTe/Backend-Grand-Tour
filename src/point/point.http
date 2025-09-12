@@ -1,12 +1,12 @@
 # Точки маршрута
 ## Получить точки маршрута
 GET http://localhost:3000/big-trip/points HTTP/1.1
-Authorization: Basic VladV1984
+Authorization: Basic Serg1984
 
 ###
 ## Добовление точки маршрута
 POST http://localhost:3000/big-trip/points HTTP/1.1
-Authorization: Basic AlexM
+Authorization: Basic Serg1984
 Content-Type: application/json
 
 {
@@ -14,27 +14,27 @@ Content-Type: application/json
    "dataFrom": "2025-07-21T11:30:59.000Z",
    "dataTo": "2025-07-21T12:00:59.000Z",
    "destination": 12,
-   "offers": [21, 22],
+   "offers": [21],
    "type": "bus"
 }
 
 ###
 ## Редактирование точки маршрута
 PUT http://localhost:3000/big-trip/points HTTP/1.1
-Authorization: Basic AlexM
+Authorization: Basic Serg1984
 Content-Type: application/json
 
 {
-    "id": "9d7a6e2a-46d1-4927-beeb-9686c46aaaa9",
+    "id": "7de92b00-6464-4c17-8ca6-83a8fb37a000",
+    "basePrice": 10000,
     "dataFrom": "2025-07-21T11:30:59.000Z",
     "dataTo": "2025-07-21T12:00:59.000Z",
-    "destination": 12,
-    "offers": [21, 22],
-    "type": "taxi",
-    "basePrice": 3000
+    "destination": 11,
+    "offers": [],
+    "type": "bus"
 }
 
 ###
 ## Удаление точки маршрута
-DELETE  http://localhost:3000/big-trip/points/6f760ca7-0a65-4de2-94ef-59c603c95ae1 HTTP/1.1
+DELETE  http://localhost:3000/big-trip/points/7de92b00-6464-4c17-8ca6-83a8fb HTTP/1.1
 Authorization: Bearer VladV1984
