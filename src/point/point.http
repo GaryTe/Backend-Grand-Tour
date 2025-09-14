@@ -21,17 +21,17 @@ Content-Type: application/json
 ###
 ## Редактирование точки маршрута
 PUT http://localhost:3000/big-trip/points HTTP/1.1
-Authorization: Basic Serg1984
+Authorization: Basic AlexM
 Content-Type: application/json
 
 {
-    "id": "7de92b00-6464-4c17-8ca6-83a8fb37a000",
+    "id": "2d6b65b5-04df-479c-83cb-fd7d6b0015d5",
     "basePrice": 10000,
     "dataFrom": "2025-07-21T11:30:59.000Z",
     "dataTo": "2025-07-21T12:00:59.000Z",
     "destination": 11,
     "offers": [],
-    "type": "bus"
+    "type": "taxi"
 }
 
 ###

@@ -6,7 +6,8 @@ import {
   Delete,
   Req,
   Param,
-  Body
+  Body,
+  UseInterceptors
 } from '@nestjs/common';
 import type { Request } from 'express';
 
@@ -15,6 +16,7 @@ import { PointDto } from './dto/point';
 import { PointRdo } from './rdo/point';
 import { fillObject } from 'src/libs/util'; 
 import { Point } from 'src/libs/type';
+import { CheckPointDatabaseInterceptor } from 'src/libs/Interceptors'; 
 
 @Controller('points')
 export class PointController {
@@ -39,6 +41,7 @@ export class PointController {
     return fillObject(PointRdo, point);
   }
 
+  @UseInterceptors(CheckPointDatabaseInterceptor)
   @Put()
   public async editingPoint(
     @Req() req: Request,
