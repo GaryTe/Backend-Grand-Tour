@@ -1,1 +1,1 @@
-export * from './point.Interceptors';
+export * from './point.Interceptor';
