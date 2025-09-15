@@ -5,10 +5,12 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { GLOBAL_PREFIX } from './libs/const';
 import { HttpExceptionFilter } from 'src/libs/http-exception';
+import { AuthorizationGuard } from './libs/guards';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(GLOBAL_PREFIX);
+  app.useGlobalGuards(new AuthorizationGuard());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter())
   const configService = app.get(ConfigService);
