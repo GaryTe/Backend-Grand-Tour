@@ -54,9 +54,9 @@ export class PointController {
   }
 
   @Delete('/:id')
-  public async deletePoint(@Req() req: Request, @Param('id') id: string):  Promise<Array<Point> | []> {
+  public async deletePoint(@Req() req: Request, @Param('id') id: string):  Promise<Point> {
     const [, token] = req.headers?.authorization?.split(' ') as string[];
-    const dataPoint = await this.pointService.deletePoint(token, id);
+    const [dataPoint] = await this.pointService.deletePoint(token, id);
 
     return dataPoint;
   }

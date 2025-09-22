@@ -10,8 +10,8 @@ Authorization: Basic Serg1984
 Content-Type: application/json
 
 {
-   "basePrice": 4000,
    "dataFrom": "2025-07-21T11:30:59.000Z",
+   "basePrice": 4000,
    "dataTo": "2025-07-21T12:00:59.000Z",
    "destination": 12,
    "offers": [21],
@@ -36,5 +36,5 @@ Content-Type: application/json
 
 ###
 ## Удаление точки маршрута
-DELETE  http://localhost:3000/big-trip/points/7de92b00-6464-4c17-8ca6-83a8fb HTTP/1.1
-Authorization: Bearer VladV1984
+DELETE  http://localhost:3000/big-trip/points/30aebfce-243a-4cc1-8df4-da5c21549294 HTTP/1.1
+Authorization: Bearer Vlad_V_A_1984
