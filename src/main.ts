@@ -9,10 +9,14 @@ import { AuthorizationGuard } from './libs/guards';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:8080',
+    methods: 'GET,POST,PUT,DELETE',
+  });
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.useGlobalGuards(new AuthorizationGuard());
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new HttpExceptionFilter())
+  app.useGlobalFilters(new HttpExceptionFilter());
   const configService = app.get(ConfigService);
 
   const host = configService.get<string>('application.host');

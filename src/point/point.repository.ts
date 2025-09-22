@@ -137,6 +137,7 @@ export class PointRepository {
     const [dataPoint] = await this.pointRepository.query(`
       DELETE FROM point
       WHERE point.id = '${id}' AND point.user = '${token}'
+      RETURNING *
     `);
 
     return dataPoint;
