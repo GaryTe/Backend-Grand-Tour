@@ -31,9 +31,26 @@
 $ npm install
 ```
 
+## Список переменных окружения
+
+- `HOST=localhost` - Хост сервера. Установите значение localhost !!!
+- `PORT=4500` - Связывает и прослушивает соединения на указанном порту. Для старта сервера.
+- `POSTGRES_PORT=4000` - Связывает и прослушивает соединения на указанном порту. Для старта базы данных.
+- `POSTGRES_USERNAME=VladVankov` - Для настройки конфигурации PostgresSQL с использованием конфигурационного файла docker-compose.dev.yml.
+- `POSTGRES_PASSWORD=v1984vlad` - Для настройки конфигурации PostgresSQL с использованием конфигурационного файла docker-compose.dev.yml
+- `POSTGRES_DB=Grand_Tour` - Название базы данных. Для настройки конфигурации PostgresSQL с использованием конфигурационного файла docker-compose.dev.yml
+- `PGADMIN_EMAIL=v4nkov.v@yandex.ru` - Укажите свою электронную почту. Для настройки конфигурации PostgresSQL с использованием конфигурационного файла docker-compose.dev.yml
+
+## Примечание к табличным данным
+
+- При создании статичных табличных данных: destination (backend-grand-tour\src\destination\destination.entity.ts), offer (backend-grand-tour\src\offer\offer.entity.ts), route (backend-grand-tour\src\offer\route.entity.ts), оброщайтесь к папке: backend-grand-tour\specification
+
 ## Compile and run the project
 
 ```bash
+# Запуск файла docker-compose.dev.yml
+$ docker compose --file backend-grand-tour/docker-compose.dev.yml --env-file backend-grand-tour/.env --project-name "grand-tour" up -d
+
 # development
 $ npm run start
 
